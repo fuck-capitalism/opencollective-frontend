@@ -55,21 +55,38 @@ const MenuItem = styled('li')`
       color: #313233;
     }
 
-    &:hover:not(:disabled):not(:active) {
-      background: none;
-      color: ${props => props.theme.colors.primary[600]};
+    &:hover:not(:disabled) {
+      background: white;
+      color: ${props => props.theme.colors.black[800]};
+      &:not(:active) {
+        background: white;
+        text-decoration: underline;
+      }
     }
 
     &:focus {
       box-shadow: none;
       outline: none;
-      text-decoration: underline;
-      background: none;
-      color: ${props => props.theme.colors.primary[600]};
+      background: white;
+      text-shadow: 0px 0px 1px black; /** Using text-shadow rather than font-weight to prevent size changes */
     }
 
     &:disabled {
       color: #8c8c8c;
+    }
+  }
+
+  a,
+  button {
+    &:not(:active) {
+      margin-right: 24px;
+    }
+
+    &:active {
+      outline: 1px solid #e8e9eb;
+      margin-left: 12px;
+      margin-right: 12px;
+      background: white;
     }
   }
 
@@ -226,7 +243,9 @@ const CollectiveNavbarActionsMenu = ({ collective, callsToAction, hiddenActionFo
                         <StyledLink as={Link} href={`/${collective.slug}/recurring-contributions`}>
                           <Container p={ITEM_PADDING}>
                             <Stack size="20px" />
-                            <FormattedMessage id="menu.subscriptions" defaultMessage="Manage Contributions" />
+                            <span>
+                              <FormattedMessage id="menu.subscriptions" defaultMessage="Manage Contributions" />
+                            </span>
                           </Container>
                         </StyledLink>
                       </MenuItem>
